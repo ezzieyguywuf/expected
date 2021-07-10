@@ -9,7 +9,7 @@ on both these points so I thought I'd take a stab at it myself
 
 [1]: https://github.com/TartanLlama/expected
 
-Here is a brief demo - see [the small test program]{./test/main.cpp} for a full
+Here is a brief demo - see [the small test program](./test/main.cpp) for a full
 working demo
 
 ```cpp
