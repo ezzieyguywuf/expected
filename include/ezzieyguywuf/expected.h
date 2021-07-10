@@ -25,6 +25,12 @@ namespace nonstd
                 return has_value() ? f(std::get<Val>(data)) : *this;
             }
 
+            template<typename F>
+            auto operator>(F f) -> std::invoke_result_t<F>
+            {
+                return has_value() ? f() : *this;
+            }
+
         private:
             std::variant<Val, Err> data;
     };
