@@ -4,7 +4,7 @@
 #include <functional>
 #include <variant>
 
-namespace nonstd
+namespace ez
 {
 
     template<typename Val, typename Err>

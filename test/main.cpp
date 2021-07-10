@@ -1,4 +1,4 @@
-#include "ezzieyguywuf/expected.h"
+#include "ez/expected.h"
 
 #include <string>
 #include <iostream>
@@ -13,7 +13,7 @@ struct B
     std::string s;
 };
 
-using EitherAB = nonstd::expected<A, B>;
+using EitherAB = ez::expected<A, B>;
 
 auto good() -> EitherAB
 {
@@ -48,7 +48,7 @@ int main()
     //
     // I couldn't match the operators exactly due to precedence and
     // associativity, which are not definable in c++
-    using EitherInt = nonstd::expected<int, std::string>;
+    using EitherInt = ez::expected<int, std::string>;
 
     // It should have a value because we made sure it did
     EitherInt val(10);
