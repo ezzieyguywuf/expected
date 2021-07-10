@@ -52,7 +52,7 @@ int main()
     if (not first.has_value()) return 1;
     if (second.has_value()) return 1;
 
-    auto ret = (good() >>= std::function(goodUsesA)) >>= std::function(badUsesA);;
+    auto ret = good() >= goodUsesA >= badUsesA;
 
     if (ret.has_value()) return 1;
 

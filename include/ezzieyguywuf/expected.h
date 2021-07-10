@@ -6,6 +6,7 @@
 
 namespace nonstd
 {
+
     template<typename Val, typename Err>
     class expected
     {
@@ -18,8 +19,8 @@ namespace nonstd
                 return std::holds_alternative<Val>(data);
             }
 
-            template<typename Val2>
-            expected<Val2, Err> operator>>=(std::function<expected<Val2, Err>(const Val&)> f)
+            template<typename F>
+            auto operator>=(F f) -> std::invoke_result_t<F, Val>
             {
                 return has_value() ? f(std::get<Val>(data)) : *this;
             }
