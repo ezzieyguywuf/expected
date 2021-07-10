@@ -6,13 +6,20 @@
 
 namespace ez
 {
+    // Forward declare unexpected so we can make it a friend. The
+    // forward-declaration helps us to match types with whatever templated
+    // expected are created
+    template<typename Expected, typename Err>
+    auto unexpected(const Err& e) -> Expected;
+
 
     template<typename Val, typename Err>
     class expected
     {
         public:
             explicit expected(const Val& v) : data(v){};
-            explicit expected(const Err& e) : data(e){};
+
+            friend auto unexpected<expected<Val, Err>, Err>(const Err& e) -> expected<Val, Err>;
 
             //! throws if `has_value` is `false`
             auto value() const -> Val
@@ -58,8 +65,16 @@ namespace ez
             }
 
         private:
+            explicit expected(const Err& e) : data(e){};
+
             std::variant<Val, Err> data;
     };
+
+    template<typename Expected, typename Err>
+    auto unexpected(const Err& e) -> Expected
+    {
+        return Expected(e);
+    }
 
 } // namespace nonstd
 #endif
