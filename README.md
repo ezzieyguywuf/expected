@@ -1,50 +1,18 @@
-This is my attempt at `std::expected`.
+This is my attempt at `std::expected`. My main goals were:
+
+1. keep the code readable (don't use too many templates)
+2. implement some version of haskell's `>>` operator
+
+While there are obviously some venerable alternative options out there (I've
+been using [this one][1] so far and it's great), I haven't found one that hits
+on both these points so I thought I'd take a stab at it myself
+
+[1]: https://github.com/TartanLlama/expected
+
+Here is a brief demo - see [the small test program]{./test/main.cpp} for a full
+working demo
 
 ```cpp
-#include "ezzieyguywuf/expected.h"
-
-#include <string>
-#include <iostream>
-
-// This will stand in for your custom data type
-struct A
-{
-    int x;
-};
-
-// This will be your custom error type
-struct B
-{
-    std::string s;
-};
-
-// A friendly alias to make things easier to read
-using EitherAB = nonstd::expected<A, B>;
-
-auto good() -> EitherAB
-{
-    std::cout << "good" << '\n';
-    return EitherAB(A(10));
-}
-
-auto bad() -> EitherAB
-{
-    std::cout << "bad" << '\n';
-    return EitherAB(B("Whoops"));
-}
-
-auto goodUsesA(const A&) -> EitherAB
-{
-    std::cout << "goodUsesA" << '\n';
-    return EitherAB(A(20));
-}
-
-auto badUsesA(const A&) -> EitherAB
-{
-    std::cout << "badUsesA" << '\n';
-    return EitherAB(B("Dang"));
-}
-
 int main()
 {
     // Demo of c++-style bind operators
