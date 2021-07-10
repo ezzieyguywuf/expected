@@ -67,9 +67,15 @@ int main()
     ret = good() >= goodUsesA > good;
     if (not ret.has_value()) return 1;
 
+    std::cout << "ret.value() = " << ret.value().x << '\n';
+    // std::cout << "ret.error() = " << ret.error().s << '\n'; // throws
+
     // Finally, this will short-circuit on `bad`, just like the >= operator
     ret = good() >= goodUsesA > good > good > bad > good > good > good;
     if (ret.has_value()) return 1;
+
+    // std::cout << "ret.value() = " << ret.value().x << '\n'; // throws
+    std::cout << "ret.error() = " << ret.error().s << '\n';
 
     return 0;
 }
